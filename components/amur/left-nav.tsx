@@ -25,35 +25,34 @@ export function LeftNav() {
     >
       <div className={cn("flex flex-col gap-8", expanded ? "items-stretch px-4" : "items-center")}>
         {/* Brand mark + toggle */}
-        <div
-          className={cn(
-            "flex",
-            expanded ? "flex-col gap-3" : "flex-col items-center gap-2",
-          )}
-        >
-          {expanded ? (
-            <div className="relative h-20 w-full">
-              <Image
-                src="/amur-logo.png"
-                alt="Амур"
-                fill
-                priority
-                sizes="240px"
-                className="object-contain object-left [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
-              />
-            </div>
-          ) : (
-            <div className="relative h-14 w-14 shrink-0">
-              <Image
-                src="/amur-mark.png"
-                alt="Амур"
-                fill
-                priority
-                sizes="56px"
-                className="object-contain [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
-              />
-            </div>
-          )}
+        <div className={cn("flex flex-col", expanded ? "gap-3" : "items-center gap-2")}>
+          <div className={cn("relative h-20", expanded ? "w-full" : "w-14")}>
+            {/* Wordmark (expanded) */}
+            <Image
+              src="/amur-logo.png"
+              alt="Амур"
+              fill
+              priority
+              sizes="240px"
+              className={cn(
+                "object-contain object-left transition-opacity duration-200 ease-out [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]",
+                expanded ? "opacity-100 delay-150" : "opacity-0",
+              )}
+            />
+            {/* Cupid mark (collapsed) */}
+            <Image
+              src="/amur-mark.png"
+              alt=""
+              aria-hidden="true"
+              fill
+              priority
+              sizes="56px"
+              className={cn(
+                "object-contain transition-opacity duration-200 ease-out [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]",
+                expanded ? "opacity-0" : "opacity-100 delay-150",
+              )}
+            />
+          </div>
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
