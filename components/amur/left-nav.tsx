@@ -35,7 +35,7 @@ export function LeftNav() {
               priority
               sizes="240px"
               className={cn(
-                "object-contain object-left transition-opacity duration-200 ease-out [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]",
+                "object-contain object-center transition-opacity duration-200 ease-out [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]",
                 expanded ? "opacity-100 delay-150" : "opacity-0",
               )}
             />
