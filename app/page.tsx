@@ -308,6 +308,17 @@ export default function Page() {
   const scenarioDone =
     activeConv.script.length <= activeState.scriptIndex
 
+  // Hint for the composer: show the next scripted "me" line so the user
+  // knows what they're about to send. When the upcoming step is "them",
+  // the hint fades out. When the scenario is over, the hint disappears.
+  const nextStep = activeConv.script[activeState.scriptIndex]
+  const nextHint =
+    !scenarioDone && nextStep && nextStep.from === "me"
+      ? nextStep.kind === "text"
+        ? nextStep.text
+        : nextStep.caption ?? "Отправить фотографию"
+      : null
+
   return (
     <main className="relative flex h-[100dvh] w-full overflow-hidden bg-sidebar">
       {/* Desktop vertical left nav (xl+) */}
@@ -351,6 +362,7 @@ export default function Page() {
             messages={activeState.messages}
             isTyping={activeState.isTyping}
             scenarioDone={scenarioDone}
+            hint={nextHint}
             onSend={handleSend}
             onBack={() => setMobileView("list")}
             onOpenProfile={() => setProfileOpen(true)}

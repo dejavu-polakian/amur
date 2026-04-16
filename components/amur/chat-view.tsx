@@ -26,6 +26,7 @@ export function ChatView({
   messages,
   isTyping,
   scenarioDone,
+  hint,
   onSend,
   onBack,
   onOpenProfile,
@@ -35,11 +36,20 @@ export function ChatView({
   messages: Message[]
   isTyping: boolean
   scenarioDone: boolean
+  /** Upcoming scripted "me" line. Null when it's the other side's turn or
+   *  when the scenario is over. */
+  hint: string | null
   onSend: (text: string) => boolean
   onBack?: () => void
   onOpenProfile?: () => void
   className?: string
 }) {
+  // Retain the last non-null hint so the text stays visible during fade-out.
+  const [displayHint, setDisplayHint] = useState<string | null>(hint)
+  useEffect(() => {
+    if (hint !== null) setDisplayHint(hint)
+  }, [hint])
+  const hintVisible = hint !== null
   const [value, setValue] = useState("")
   const scrollRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -321,24 +331,49 @@ export function ChatView({
             )}
           </div>
 
-          <div className="mt-3 flex items-center justify-between gap-3 px-1">
-            <div className="flex min-w-0 items-center gap-2 text-[11px] text-muted-foreground">
-              <Sparkles className="h-3 w-3 shrink-0 text-accent" strokeWidth={1.8} />
-              <span className="hidden shrink-0 sm:inline">Подсказка Амура:</span>
-              <span className="shrink-0 sm:hidden">Амур:</span>
-              <button
-                type="button"
-                onClick={() => setValue(conversation.suggestion)}
-                className="truncate text-foreground underline underline-offset-4 transition-colors hover:text-primary"
+          {/* Composer hint row — collapses entirely when the scenario is over,
+              fades out when it's the other side's turn to speak. */}
+          <div
+            aria-hidden={scenarioDone || !hintVisible}
+            className={cn(
+              "grid overflow-hidden transition-[grid-template-rows,margin,opacity] duration-300 ease-out",
+              scenarioDone
+                ? "mt-0 grid-rows-[0fr] opacity-0"
+                : "mt-3 grid-rows-[1fr] opacity-100",
+            )}
+          >
+            <div className="min-h-0">
+              <div
+                className={cn(
+                  "flex items-center justify-between gap-3 px-1 transition-opacity duration-300 ease-out",
+                  hintVisible ? "opacity-100" : "opacity-0",
+                )}
               >
-                «{conversation.suggestion}»
-              </button>
+                <div className="flex min-w-0 items-center gap-2 text-[11px] text-muted-foreground">
+                  <Sparkles
+                    className="h-3 w-3 shrink-0 text-accent"
+                    strokeWidth={1.8}
+                  />
+                  <span className="hidden shrink-0 sm:inline">
+                    Подсказка Амура:
+                  </span>
+                  <span className="shrink-0 sm:hidden">Амур:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (displayHint) setValue(displayHint)
+                    }}
+                    disabled={!hintVisible}
+                    className="truncate text-foreground underline underline-offset-4 transition-colors hover:text-primary disabled:cursor-default"
+                  >
+                    «{displayHint ?? ""}»
+                  </button>
+                </div>
+                <span className="hidden shrink-0 text-[11px] text-muted-foreground lg:inline">
+                  Enter — отправить · Shift+Enter — перенос
+                </span>
+              </div>
             </div>
-            <span className="hidden shrink-0 text-[11px] text-muted-foreground lg:inline">
-              {scenarioDone
-                ? "Enter — отправить · Shift+Enter — перенос"
-                : "Enter — отправить · Shift+Enter — перенос"}
-            </span>
           </div>
         </div>
       </div>
