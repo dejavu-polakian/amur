@@ -20,60 +20,56 @@ export function LeftNav() {
     <aside
       className={cn(
         "hidden h-full shrink-0 flex-col justify-between bg-sidebar py-6 transition-[width] duration-300 ease-out xl:flex",
-        expanded ? "w-[232px]" : "w-[76px]",
+        expanded ? "w-[256px]" : "w-[76px]",
       )}
     >
-      <div className={cn("flex flex-col gap-10", expanded ? "items-stretch px-4" : "items-center")}>
+      <div className={cn("flex flex-col gap-8", expanded ? "items-stretch px-4" : "items-center")}>
         {/* Brand mark + toggle */}
         <div
           className={cn(
-            "flex items-center",
-            expanded ? "justify-between" : "flex-col gap-1 justify-center",
+            "flex",
+            expanded ? "flex-col gap-3" : "flex-col items-center gap-2",
           )}
         >
-          <div
-            className={cn(
-              "flex items-center",
-              expanded ? "gap-2.5" : "flex-col",
-            )}
-          >
-            {expanded ? (
-              <div className="relative h-9 w-[150px] shrink-0">
-                <Image
-                  src="/amur-logo.png"
-                  alt="Амур"
-                  fill
-                  priority
-                  sizes="150px"
-                  className="object-contain object-left [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
-                />
-              </div>
-            ) : (
-              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-primary/10">
-                <Image
-                  src="/amur-logo.png"
-                  alt="Амур"
-                  fill
-                  priority
-                  sizes="44px"
-                  style={{ objectPosition: "88% 50%" }}
-                  className="scale-[2.2] object-cover [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
-                />
-              </div>
-            )}
-          </div>
+          {expanded ? (
+            <div className="relative h-14 w-full">
+              <Image
+                src="/amur-logo.png"
+                alt="Амур"
+                fill
+                priority
+                sizes="200px"
+                className="object-contain object-left [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
+              />
+            </div>
+          ) : (
+            <div className="relative h-12 w-12 shrink-0">
+              <Image
+                src="/amur-logo.png"
+                alt="Амур"
+                fill
+                priority
+                sizes="48px"
+                style={{ objectPosition: "100% 50%" }}
+                className="scale-[2.6] object-contain [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
+              />
+            </div>
+          )}
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
             aria-label={expanded ? "Свернуть панель" : "Развернуть панель"}
             aria-expanded={expanded}
             className={cn(
-              "flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground",
-              !expanded && "mt-1",
+              "flex h-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground",
+              expanded ? "w-full gap-2 px-3 text-xs font-medium" : "w-8",
             )}
           >
             {expanded ? (
-              <PanelLeftClose className="h-[16px] w-[16px]" strokeWidth={1.6} />
+              <>
+                <PanelLeftClose className="h-[16px] w-[16px]" strokeWidth={1.6} />
+                <span className="tracking-tight">Свернуть</span>
+              </>
             ) : (
               <PanelLeftOpen className="h-[16px] w-[16px]" strokeWidth={1.6} />
             )}
