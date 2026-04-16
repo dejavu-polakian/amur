@@ -172,7 +172,9 @@ function ExpandedView({
             Все
           </button>
         </div>
-        <div className="mt-3 flex gap-3 overflow-x-auto scrollbar-thin">
+        {/* -mx-1 + px-1 py-1.5 give the ring-offset room to render without
+             being clipped by the overflow-x scroller or the container edge. */}
+        <div className="mt-2 -mx-1 flex gap-3 overflow-x-auto px-1 py-1.5 scrollbar-thin">
           {newMatches.map((m) => (
             <button
               key={m.id}
