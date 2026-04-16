@@ -43,15 +43,14 @@ export function LeftNav() {
               />
             </div>
           ) : (
-            <div className="relative h-12 w-12 shrink-0">
+            <div className="relative h-11 w-11 shrink-0">
               <Image
-                src="/amur-logo.png"
+                src="/amur-mark.png"
                 alt="Амур"
                 fill
                 priority
-                sizes="48px"
-                style={{ objectPosition: "100% 50%" }}
-                className="scale-[2.6] object-contain [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
+                sizes="44px"
+                className="object-contain [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
               />
             </div>
           )}
