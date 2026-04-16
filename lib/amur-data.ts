@@ -56,6 +56,10 @@ export type Interest = { label: string; icon: LucideIcon };
 export type Conversation = {
   id: string;
   name: string;
+  /** Dative form of the name, used in the chat composer placeholder
+   *  ("Напишите {nameDative}…"). Russian name declensions are irregular
+   *  (Данила → Даниле, Лев → Льву), so each name keeps its own form. */
+  nameDative: string;
   age: number;
   avatar: string;
   photos: string[];
@@ -91,6 +95,7 @@ export const conversations: Conversation[] = [
   {
     id: "c1",
     name: "Артём",
+    nameDative: "Артёму",
     age: 31,
     avatar: "/profiles/artem-main.jpg",
     photos: ["/profiles/artem-main.jpg", "/profiles/artem-2.jpg", "/profiles/artem-3.jpg"],
@@ -179,6 +184,7 @@ export const conversations: Conversation[] = [
   {
     id: "c2",
     name: "Данила",
+    nameDative: "Даниле",
     age: 29,
     avatar: "/profiles/match-1.jpg",
     photos: ["/profiles/match-1.jpg", "/profiles/match-4.jpg"],
@@ -254,6 +260,7 @@ export const conversations: Conversation[] = [
   {
     id: "c3",
     name: "Михаил",
+    nameDative: "Михаилу",
     age: 34,
     avatar: "/profiles/match-2.jpg",
     photos: ["/profiles/match-2.jpg", "/profiles/match-3.jpg"],
@@ -328,6 +335,7 @@ export const conversations: Conversation[] = [
   {
     id: "c4",
     name: "Кирилл",
+    nameDative: "Кириллу",
     age: 30,
     avatar: "/profiles/match-3.jpg",
     photos: ["/profiles/match-3.jpg", "/profiles/match-5.jpg"],
@@ -401,6 +409,7 @@ export const conversations: Conversation[] = [
   {
     id: "c5",
     name: "Андрей",
+    nameDative: "Андрею",
     age: 28,
     avatar: "/profiles/match-4.jpg",
     photos: ["/profiles/match-4.jpg", "/profiles/match-1.jpg"],
@@ -475,6 +484,7 @@ export const conversations: Conversation[] = [
   {
     id: "c6",
     name: "Лев",
+    nameDative: "Льву",
     age: 33,
     avatar: "/profiles/match-5.jpg",
     photos: ["/profiles/match-5.jpg", "/profiles/match-2.jpg"],

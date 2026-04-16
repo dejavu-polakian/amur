@@ -95,7 +95,7 @@ export function LeftNav() {
                 <span
                   className={cn(
                     "truncate text-sm tracking-tight",
-                    active ? "font-semibold text-primary" : "font-semibold text-foreground",
+                    active ? "font-semibold text-primary" : "font-normal text-foreground/80",
                   )}
                 >
                   {label}
@@ -123,7 +123,7 @@ export function LeftNav() {
         >
           <Settings className="h-[18px] w-[18px] shrink-0" strokeWidth={1.6} />
           {expanded && (
-            <span className="truncate text-sm font-semibold tracking-tight text-foreground">Настройки</span>
+            <span className="truncate text-sm font-normal tracking-tight text-foreground/80">Настройки</span>
           )}
         </button>
 

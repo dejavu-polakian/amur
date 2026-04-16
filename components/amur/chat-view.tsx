@@ -285,7 +285,7 @@ export function ChatView({
           Extra bottom padding on md..xl clears the floating dock. */}
       <div className="border-t border-border px-4 py-4 md:px-6 md:py-5 md:pb-[76px] lg:px-8 xl:pb-5">
         <div className="mx-auto w-full max-w-[720px]">
-          <div className="flex items-end gap-1 rounded-3xl border border-border bg-card px-2 py-2 shadow-sm transition-[border-color,box-shadow] focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/10 md:gap-2 md:px-3">
+          <div className="flex items-end gap-1 rounded-full border border-border bg-card px-2 py-2 shadow-sm transition-[border-color,box-shadow] focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/10 md:gap-2 md:px-3">
             <button
               type="button"
               aria-label="Эмодзи"
@@ -307,7 +307,7 @@ export function ChatView({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={`Напишите ${conversation.name}у…`}
+              placeholder={`Напишите ${conversation.nameDative}…`}
               className="max-h-[180px] min-h-[36px] flex-1 resize-none bg-transparent px-2 py-1.5 text-[15px] leading-relaxed text-foreground placeholder:text-muted-foreground focus:outline-none scrollbar-thin"
             />
 

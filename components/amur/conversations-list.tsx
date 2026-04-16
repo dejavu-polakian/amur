@@ -218,10 +218,10 @@ function ExpandedView({
                   type="button"
                   onClick={() => onSelect(c.id)}
                   className={cn(
-                    "flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors",
+                    "flex w-full items-center gap-3 px-3 py-2.5 text-left transition-[background-color,border-radius] duration-300 ease-out",
                     active
-                      ? "bg-primary/8 hover:bg-primary/10"
-                      : "hover:bg-sidebar-accent",
+                      ? "rounded-full bg-primary/8 hover:bg-primary/10"
+                      : "rounded-2xl hover:rounded-full hover:bg-sidebar-accent",
                   )}
                 >
                   <div className="relative">

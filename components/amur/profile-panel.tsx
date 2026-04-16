@@ -21,8 +21,8 @@ export function ProfilePanel({ conversation }: { conversation: Conversation }) {
   return (
     <aside
       className={cn(
-        "relative hidden h-full shrink-0 flex-col overflow-hidden rounded-3xl bg-background shadow-[0_1px_2px_rgba(120,50,20,0.04),0_8px_24px_-12px_rgba(120,50,20,0.08)] ring-1 ring-border/60 transition-[width] duration-300 ease-out xl:flex",
-        expanded ? "w-[360px]" : "w-[68px]",
+        "relative hidden h-full shrink-0 flex-col overflow-hidden bg-background shadow-[0_1px_2px_rgba(120,50,20,0.04),0_8px_24px_-12px_rgba(120,50,20,0.08)] ring-1 ring-border/60 transition-[width,border-radius] duration-300 ease-out xl:flex",
+        expanded ? "w-[360px] rounded-3xl" : "w-[68px] rounded-full",
       )}
     >
       <button
