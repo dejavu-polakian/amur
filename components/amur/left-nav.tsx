@@ -37,11 +37,29 @@ export function LeftNav() {
               expanded ? "gap-2.5" : "flex-col",
             )}
           >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <span className="font-serif text-2xl leading-none">А</span>
-            </div>
-            {expanded && (
-              <span className="font-serif text-xl leading-none text-foreground">Амур</span>
+            {expanded ? (
+              <div className="relative h-9 w-[150px] shrink-0">
+                <Image
+                  src="/amur-logo.png"
+                  alt="Амур"
+                  fill
+                  priority
+                  sizes="150px"
+                  className="object-contain object-left [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
+                />
+              </div>
+            ) : (
+              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-primary/10">
+                <Image
+                  src="/amur-logo.png"
+                  alt="Амур"
+                  fill
+                  priority
+                  sizes="44px"
+                  style={{ objectPosition: "88% 50%" }}
+                  className="scale-[2.2] object-cover [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
+                />
+              </div>
             )}
           </div>
           <button
