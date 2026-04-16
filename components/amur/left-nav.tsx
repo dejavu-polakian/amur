@@ -32,24 +32,24 @@ export function LeftNav() {
           )}
         >
           {expanded ? (
-            <div className="relative h-14 w-full">
+            <div className="relative h-20 w-full">
               <Image
                 src="/amur-logo.png"
                 alt="Амур"
                 fill
                 priority
-                sizes="200px"
+                sizes="240px"
                 className="object-contain object-left [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
               />
             </div>
           ) : (
-            <div className="relative h-11 w-11 shrink-0">
+            <div className="relative h-14 w-14 shrink-0">
               <Image
                 src="/amur-mark.png"
                 alt="Амур"
                 fill
                 priority
-                sizes="44px"
+                sizes="56px"
                 className="object-contain [filter:brightness(0)_saturate(100%)_invert(22%)_sepia(88%)_saturate(2490%)_hue-rotate(338deg)_brightness(92%)_contrast(95%)]"
               />
             </div>
