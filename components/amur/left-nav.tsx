@@ -1,0 +1,137 @@
+"use client"
+
+import { useState } from "react"
+import { Flame, MessageCircle, Compass, Heart, Settings, Sparkles, PanelLeftOpen, PanelLeftClose } from "lucide-react"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
+
+const items = [
+  { icon: Flame, label: "Лента", key: "feed" },
+  { icon: Compass, label: "Поиск", key: "discover" },
+  { icon: Heart, label: "Симпатии", key: "likes" },
+  { icon: MessageCircle, label: "Сообщения", key: "messages", active: true },
+  { icon: Sparkles, label: "Амур+", key: "premium" },
+]
+
+export function LeftNav() {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <aside
+      className={cn(
+        "hidden h-full shrink-0 flex-col justify-between bg-sidebar py-6 transition-[width] duration-300 ease-out xl:flex",
+        expanded ? "w-[232px]" : "w-[76px]",
+      )}
+    >
+      <div className={cn("flex flex-col gap-10", expanded ? "items-stretch px-4" : "items-center")}>
+        {/* Brand mark + toggle */}
+        <div
+          className={cn(
+            "flex items-center",
+            expanded ? "justify-between" : "flex-col gap-1 justify-center",
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center",
+              expanded ? "gap-2.5" : "flex-col",
+            )}
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <span className="font-serif text-2xl leading-none">А</span>
+            </div>
+            {expanded && (
+              <span className="font-serif text-xl leading-none text-foreground">Амур</span>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            aria-label={expanded ? "Свернуть панель" : "Развернуть панель"}
+            aria-expanded={expanded}
+            className={cn(
+              "flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground",
+              !expanded && "mt-1",
+            )}
+          >
+            {expanded ? (
+              <PanelLeftClose className="h-[16px] w-[16px]" strokeWidth={1.6} />
+            ) : (
+              <PanelLeftOpen className="h-[16px] w-[16px]" strokeWidth={1.6} />
+            )}
+          </button>
+        </div>
+
+        {/* Nav */}
+        <nav className={cn("flex flex-col gap-2", expanded ? "items-stretch" : "items-center")}>
+          {items.map(({ icon: Icon, label, key, active }) => (
+            <button
+              key={key}
+              type="button"
+              aria-label={label}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "group relative flex h-11 items-center rounded-full transition-colors",
+                expanded ? "w-full justify-start gap-3 px-3" : "w-11 justify-center",
+                active
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
+              )}
+            >
+              <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.6} />
+              {expanded && (
+                <span
+                  className={cn(
+                    "truncate text-sm tracking-tight",
+                    active ? "font-semibold text-primary" : "font-semibold text-foreground",
+                  )}
+                >
+                  {label}
+                </span>
+              )}
+              {active && !expanded && (
+                <span className="absolute -left-[17px] top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-primary" />
+              )}
+              {active && expanded && (
+                <span className="absolute -left-4 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-primary" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      <div className={cn("flex flex-col gap-3", expanded ? "items-stretch px-4" : "items-center")}>
+        <button
+          type="button"
+          aria-label="Настройки"
+          className={cn(
+            "flex h-11 items-center rounded-full text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground",
+            expanded ? "w-full justify-start gap-3 px-3" : "w-11 justify-center",
+          )}
+        >
+          <Settings className="h-[18px] w-[18px] shrink-0" strokeWidth={1.6} />
+          {expanded && (
+            <span className="truncate text-sm font-semibold tracking-tight text-foreground">Настройки</span>
+          )}
+        </button>
+
+        <div
+          className={cn(
+            "flex items-center",
+            expanded ? "gap-3 rounded-full px-1 py-1 hover:bg-sidebar-accent/60" : "flex-col",
+          )}
+        >
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-background">
+            <Image src="/profiles/user-me.jpg" alt="Ваш профиль" fill className="object-cover" sizes="40px" />
+          </div>
+          {expanded && (
+            <div className="flex min-w-0 flex-col leading-tight">
+              <span className="truncate text-sm font-semibold text-foreground">Анастасия</span>
+              <span className="truncate text-xs text-muted-foreground">Мой профиль</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </aside>
+  )
+}
